@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a3EggGabQX/MEDvEkx6li3rdsTx+kzz5jAEKjsyheGFH6r+noisArcK1dNNA9FyY7roBj+Z9JQeeRfNeoCfrXg==",
+  "dgSpecHash": "ZJyCG7Rnr/NxuyECSxbo/u/G5p6JRnNulb59lBoK5n4cXenNpwfFejlwiJ4TSflDdiHMxwYyQQQTFw6OA5XM+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
+  "projectFilePath": "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\marin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

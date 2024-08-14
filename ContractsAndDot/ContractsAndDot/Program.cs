@@ -2,12 +2,52 @@
 using ContractsAndDot;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using System.Reflection.Metadata.Ecma335;
 
 Console.WriteLine("Hello");
 
 //DataContext dataContext = new DataContext();
 
-AddedData();
+//AddedData();
+
+
+using (var context = new DataContext())
+{    
+    var contracts = context.Database.SqlQuery<decimal>(@$"select sum(Amount)
+                                                       from contracts
+                                                       where datepart(year, Contracts.DateOfSigning) = datepart(year, getDate())").ToList();
+    Console.WriteLine(contracts.First());
+
+
+    var contracts2 = context.Database.SqlQuery<decimal>(@$"select sum(Amount), lp.CompanyName, ctr.Name
+                                                        from contracts c
+                                                        join LegalPersons lp
+                                                        on c.CounterpartyId = lp.LegalPersonId
+                                                        join Countries ctr
+                                                        on lp.CountryId = ctr.CountryId
+                                                        where ctr.Name = 'Россия'
+                                                        group by lp.LegalPersonId, lp.CompanyName, ctr.Name
+                                                        ");
+    foreach (var c in contracts2) {
+        Console.WriteLine(c);
+    }
+
+    var query_emails = context.Database.SqlQuery<string>(@$"select email 
+                                                         from PrivatePersons pp
+                                                         join Contracts c
+                                                         on pp.PrivatePersonId = c.DesigneeId
+                                                         where c.DateOfSigning > dateadd(day, -30, getdate())
+                                                         and c.Amount > 40000
+                                                         ");
+    foreach (var qe in query_emails)
+    {
+        Console.WriteLine(qe);
+    }
+
+
+}
+
+
 
 void AddedData() {
     using (var context = new DataContext())
@@ -217,15 +257,20 @@ void AddedData() {
                     Designee = context.PrivatePersons.First(d => d.Country.Name == "Англия"),
                     Amount = 4500000,
                     Status = Status.InWork,
-                    DateOfSigning = new DateTime(10,8,2024)
+                    DateOfSigning = new DateTime(2024,8,10)
             },
             new Contract {
                     Counterparty = context.LegalPersons.First(c => c.Country.Name == "Россия" && c.City.Name == "Самара"),
                     Designee = context.PrivatePersons.First(d => d.Age > 60),
                     Amount = 39000,
                     Status = Status.InWork,
-                    DateOfSigning = new DateTime(10,8,2024)
+                    DateOfSigning = new DateTime(2024,6,12)
             },
         };
+        foreach (var contract in contracts)
+        {
+            context.Contracts.Add(contract);
+        }
+        context.SaveChanges();
     }
 }

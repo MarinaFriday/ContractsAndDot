@@ -4128,11 +4128,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
+      "projectUniqueName": "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
       "projectName": "ContractsAndDot",
-      "projectPath": "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
+      "projectPath": "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
       "packagesPath": "C:\\Users\\marin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\ContractsAndDot\\obj\\",
+      "outputPath": "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\ContractsAndDot\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4149,8 +4149,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\marin\\OneDrive\\Desktop\\IT-решения\\ContractsAndDot\\Models\\Models.csproj"
+            "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\marin\\OneDrive\\Desktop\\Акелон\\gitinit\\ContractsAndDot\\Models\\Models.csproj"
             }
           }
         }
