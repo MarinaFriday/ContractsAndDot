@@ -1,8 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more informati
 using ContractsAndDot;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Models;
+using System;
 using System.Reflection.Metadata.Ecma335;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 Console.WriteLine("Hello");
 
@@ -12,7 +18,7 @@ Console.WriteLine("Hello");
 
 
 using (var context = new DataContext())
-{    
+{
     var query_sum_amount = context.Database.SqlQuery<decimal>(@$"select sum(Amount)
                                                        from contracts
                                                        where datepart(year, Contracts.DateOfSigning) = datepart(year, getDate())").ToList();
@@ -89,14 +95,14 @@ using (var context = new DataContext())
                          join lp in context.LegalPersons on c.CounterpartyId equals lp.LegalPersonId
                          join cit in context.Cities on lp.CityId equals cit.CityId
                          where cit.Name == "Москва" && c.Status == status
-                         select new 
-                         { 
-                            FirstName = pp.FirstName,
-                            LastName = pp.LastName,
-                            MiddleName = pp.MiddleName,
-                            Email = pp.Email,
-                            Phone = pp.Phone,
-                            Bithday = pp.Birthday
+                         select new
+                         {
+                             FirstName = pp.FirstName,
+                             LastName = pp.LastName,
+                             MiddleName = pp.MiddleName,
+                             Email = pp.Email,
+                             Phone = pp.Phone,
+                             Bithday = pp.Birthday
                          }
         );
 
@@ -105,9 +111,23 @@ using (var context = new DataContext())
         Console.WriteLine(@$"{qfs.FirstName} {qfs.LastName} {qfs.MiddleName} {qfs.Email} {qfs.Phone} {qfs.Bithday}");
     }
 
-    //json
 
+     JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+    string path4 = "C:\\Users\\marin\\OneDrive\\Desktop\\json.txt";
 
+    //foreach (var qfs in query_for_ser) {
+        string inJson = JsonSerializer.Serialize(query_for_ser, options);
+        
+        using (FileStream fileStream = new FileStream(path4, FileMode.OpenOrCreate))
+        {
+        byte[] buffer = Encoding.Default.GetBytes(inJson);
+        await fileStream.WriteAsync(buffer, 0, buffer.Length);
+        }
+    //}
 
 }
 
