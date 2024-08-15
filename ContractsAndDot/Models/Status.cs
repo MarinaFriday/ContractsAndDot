@@ -13,6 +13,6 @@ namespace Models
         InWork,
         Executed,
         Suspended,
-        Terminated,
+        Closed,
     }
 }

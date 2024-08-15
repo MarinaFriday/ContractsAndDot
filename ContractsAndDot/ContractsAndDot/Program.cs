@@ -13,10 +13,10 @@ Console.WriteLine("Hello");
 
 using (var context = new DataContext())
 {    
-    var contracts = context.Database.SqlQuery<decimal>(@$"select sum(Amount)
+    var query_sum_amount = context.Database.SqlQuery<decimal>(@$"select sum(Amount)
                                                        from contracts
                                                        where datepart(year, Contracts.DateOfSigning) = datepart(year, getDate())").ToList();
-    Console.WriteLine(contracts.First());
+    Console.WriteLine(query_sum_amount.First());
 
 
     var contracts2 = context.Database.SqlQuery<decimal>(@$"select sum(Amount), lp.CompanyName, ctr.Name
@@ -44,6 +44,19 @@ using (var context = new DataContext())
         Console.WriteLine(qe);
     }
 
+    var status = Status.Closed;
+    var query_update = context.Database.ExecuteSql(@$"update c 
+                                                   set Status = {status}
+                                                   from Contracts c
+                                                   join PrivatePersons pp
+                                                   on c.DesigneeId = pp.PrivatePersonId
+                                                   where pp.Age >= 60").ToString();
+    var simple_query = context.Contracts.FromSql<Contract>(@$"select * from Contracts");
+
+    foreach (var sq in simple_query)
+    {
+        Console.WriteLine(sq.Status);
+    }
 
 }
 
