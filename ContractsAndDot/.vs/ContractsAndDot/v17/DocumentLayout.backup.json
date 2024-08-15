@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{C79672E7-0618-4978-98F4-D552EFDAD99F}|ContractsAndDot\\ContractsAndDot.csproj|solutionrelative:contractsanddot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C79672E7-0618-4978-98F4-D552EFDAD99F}|ContractsAndDot\\ContractsAndDot.csproj|c:\\users\\marin\\onedrive\\desktop\\\u0430\u043A\u0435\u043B\u043E\u043D\\gitinit\\contractsanddot\\contractsanddot\\contractsanddot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C79672E7-0618-4978-98F4-D552EFDAD99F}|ContractsAndDot\\ContractsAndDot.csproj|solutionrelative:contractsanddot\\contractsanddot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3670863F-A433-4CF6-AFF7-0B772A4F890C}|Models\\Models.csproj|c:\\users\\marin\\onedrive\\desktop\\\u0430\u043A\u0435\u043B\u043E\u043D\\gitinit\\contractsanddot\\models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3670863F-A433-4CF6-AFF7-0B772A4F890C}|Models\\Models.csproj|solutionrelative:models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -37,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3670863F-A433-4CF6-AFF7-0B772A4F890C}|Models\\Models.csproj|c:\\users\\marin\\onedrive\\desktop\\\u0430\u043A\u0435\u043B\u043E\u043D\\gitinit\\contractsanddot\\models\\gender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3670863F-A433-4CF6-AFF7-0B772A4F890C}|Models\\Models.csproj|solutionrelative:models\\gender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C79672E7-0618-4978-98F4-D552EFDAD99F}|ContractsAndDot\\ContractsAndDot.csproj|c:\\users\\marin\\onedrive\\desktop\\\u0430\u043A\u0435\u043B\u043E\u043D\\gitinit\\contractsanddot\\contractsanddot\\contractsanddot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C79672E7-0618-4978-98F4-D552EFDAD99F}|ContractsAndDot\\ContractsAndDot.csproj|solutionrelative:contractsanddot\\contractsanddot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -60,38 +60,14 @@
               "RelativeDocumentMoniker": "ContractsAndDot\\Program.cs",
               "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\Program.cs",
               "RelativeToolTip": "ContractsAndDot\\Program.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAcwHUAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-14T13:37:46.34Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\DataContext.cs",
-              "RelativeDocumentMoniker": "ContractsAndDot\\DataContext.cs",
-              "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\DataContext.cs",
-              "RelativeToolTip": "ContractsAndDot\\DataContext.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAArwBEAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-14T13:37:46.33Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "City.cs",
-              "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\City.cs",
-              "RelativeDocumentMoniker": "Models\\City.cs",
-              "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\City.cs",
-              "RelativeToolTip": "Models\\City.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-14T13:37:46.35Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Gender.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\Gender.cs",
               "RelativeDocumentMoniker": "Models\\Gender.cs",
@@ -103,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Country.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\Country.cs",
               "RelativeDocumentMoniker": "Models\\Country.cs",
@@ -115,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PrivatePerson.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\PrivatePerson.cs",
               "RelativeDocumentMoniker": "Models\\PrivatePerson.cs",
@@ -127,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Contract.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\Contract.cs",
               "RelativeDocumentMoniker": "Models\\Contract.cs",
@@ -139,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Status.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\Status.cs",
               "RelativeDocumentMoniker": "Models\\Status.cs",
@@ -151,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LegalPerson.cs",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\LegalPerson.cs",
               "RelativeDocumentMoniker": "Models\\LegalPerson.cs",
@@ -163,15 +139,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "ContractsAndDot.csproj",
               "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
               "RelativeDocumentMoniker": "ContractsAndDot\\ContractsAndDot.csproj",
               "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\ContractsAndDot.csproj",
               "RelativeToolTip": "ContractsAndDot\\ContractsAndDot.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-14T13:37:46.431Z"
+              "WhenOpened": "2024-08-14T13:37:46.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "City.cs",
+              "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\City.cs",
+              "RelativeDocumentMoniker": "Models\\City.cs",
+              "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\Models\\City.cs",
+              "RelativeToolTip": "Models\\City.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T13:37:46.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\DataContext.cs",
+              "RelativeDocumentMoniker": "ContractsAndDot\\DataContext.cs",
+              "ToolTip": "C:\\Users\\marin\\OneDrive\\Desktop\\\u0410\u043A\u0435\u043B\u043E\u043D\\gitinit\\ContractsAndDot\\ContractsAndDot\\DataContext.cs",
+              "RelativeToolTip": "ContractsAndDot\\DataContext.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAArwBEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T13:37:46.33Z"
             }
           ]
         }

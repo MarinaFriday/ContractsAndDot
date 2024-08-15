@@ -1,360 +1,58 @@
-﻿// See https://aka.ms/new-console-template for more informati
-using ContractsAndDot;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Models;
-using System;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using ContractsAndDot.Services;
 
-Console.WriteLine("Hello");
+var contructService = new ContractService();
+bool menu = true;
 
-//DataContext dataContext = new DataContext();
-
-//AddedData();
-
-
-using (var context = new DataContext())
+do
 {
-    var query_sum_amount = context.Database.SqlQuery<decimal>(@$"select sum(Amount)
-                                                       from contracts
-                                                       where datepart(year, Contracts.DateOfSigning) = datepart(year, getDate())").ToList();
-    Console.WriteLine(query_sum_amount.First());
+    Console.WriteLine("------Меню------");
+    Console.WriteLine("МАЛО ТЕСТОВЫХ ДАННЫХ, Я ПОДГРУЖАЛА ПЯТЬ РАЗ ОДНО И ТОЖЕ, ЧТОБЫ ПРОТЕСТИРОВАТЬ ЗАПРОСЫ");
+    Console.WriteLine("0.Загрузить тестовые данные.");
+    Console.WriteLine("1.Вывести сумму всех заключенных договоров за текущий год.");
+    Console.WriteLine("2.Вывести сумму заключенных договоров по каждому контрагенту из России.");
+    Console.WriteLine("3.Вывести список e-mail уполномоченных лиц, заключивших договора за последние 30 дней, на сумму больше 40000");
+    Console.WriteLine("4.Изменить статус договора на Расторгнут для физических лиц, у которых есть действующий договор, и возраст которых старше 60 лет включительно");
+    Console.WriteLine("5.Создать отчет (текстовый файл, например, в формате xml, xlsx, json) содержащий ФИО, e-mail, моб. телефон, дату рождения физ. лиц, у которых есть действующие договора по компаниям, расположенных в городе Москва");
+    Console.WriteLine("6. Выход");
+    Console.WriteLine();
 
+    int choice = int.Parse(Console.ReadLine());
 
-    var contracts2 = context.Database.SqlQuery<decimal>(@$"select sum(Amount), lp.CompanyName, ctr.Name
-                                                        from contracts c
-                                                        join LegalPersons lp
-                                                        on c.CounterpartyId = lp.LegalPersonId
-                                                        join Countries ctr
-                                                        on lp.CountryId = ctr.CountryId
-                                                        where ctr.Name = 'Россия'
-                                                        group by lp.LegalPersonId, lp.CompanyName, ctr.Name
-                                                        ");
-    foreach (var c in contracts2) {
-        Console.WriteLine(c);
-    }
-
-    var query_emails = context.Database.SqlQuery<string>(@$"select email 
-                                                         from PrivatePersons pp
-                                                         join Contracts c
-                                                         on pp.PrivatePersonId = c.DesigneeId
-                                                         where c.DateOfSigning > dateadd(day, -30, getdate())
-                                                         and c.Amount > 40000
-                                                         ");
-    foreach (var qe in query_emails)
+    switch (choice)
     {
-        Console.WriteLine(qe);
+        default:
+            Console.WriteLine("Неверный ввод");
+            break;
+        case 0:
+            var testData = new TestData();
+            break;
+        case 1:
+            Console.Clear();
+            contructService.QuerySumAmount();
+            break;
+        case 2:
+            Console.Clear();
+            contructService.QuerySumAmountForCounterparty();
+            break;
+        case 3:
+            Console.Clear();
+            contructService.QueryEmails();
+            break;
+        case 4:
+            Console.Clear();
+            contructService.UpdateStatus();
+            break;
+        case 5:
+            var query_for_ser = contructService.QueryForReport();
+            Console.WriteLine("Введите путь, по которому сохранится файл: ");
+            string path = Console.ReadLine();
+            //C:\Users\marin\OneDrive\Desktop\json.json;
+            var transformService = new TransformService();
+            string jsonFormat = transformService.TransformToJson(query_for_ser);
+            transformService.WriteToFile(path, jsonFormat);
+            break;
+        case 6:
+            menu=false;
+            break;
     }
-
-    var status = Status.Closed;
-    var query_update = context.Database.ExecuteSql(@$"update c 
-                                                   set Status = {status}
-                                                   from Contracts c
-                                                   join PrivatePersons pp
-                                                   on c.DesigneeId = pp.PrivatePersonId
-                                                   where pp.Age >= 60").ToString();
-    var simple_query = context.Contracts.FromSql<Contract>(@$"select * from Contracts");
-
-    foreach (var sq in simple_query)
-    {
-        Console.WriteLine(sq.Status);
-    }
-
-    //var qurey_for_serializer = context.Database.ExecuteSql(@$"
-    //                                                       select * from PrivatePersons pp
-    //                                                       join Contracts c
-    //                                                       on pp.PrivatePersonId = c.DesigneeId
-    //                                                       join LegalPersons lp
-    //                                                       on c.CounterpartyId = lp.LegalPersonId
-    //                                                       join Cities ci
-    //                                                       on lp.CityId = ci.CityId
-    //                                                       where ci.Name = 'Москва'
-    //                                                       and c.Status = {status}
-    //                                                       ");
-    //foreach (var qfs in qurey_for_serializer)
-    //{
-    //    Console.WriteLine(@$"{qfs.FirstName} {qfs.LastName} {qfs.MiddleName}");
-    //}
-
-
-    //var qurey_for_serializer = context.PrivatePersons
-    //                                  .Include(pp => pp.Contracts)
-    //                                  .ThenInclude(c => c.Counterparty)
-    //                                  .ThenInclude(cp => cp.City)  
-    //                                  .Where(pp => pp.Contracts.Where(c => c.Counterparty.City.Name == "Москва"))
-    //                                  .ToList();
-
-
-
-    var query_for_ser = (from pp in context.PrivatePersons
-                         join c in context.Contracts on pp.PrivatePersonId equals c.DesigneeId
-                         join lp in context.LegalPersons on c.CounterpartyId equals lp.LegalPersonId
-                         join cit in context.Cities on lp.CityId equals cit.CityId
-                         where cit.Name == "Москва" && c.Status == status
-                         select new
-                         {
-                             FirstName = pp.FirstName,
-                             LastName = pp.LastName,
-                             MiddleName = pp.MiddleName,
-                             Email = pp.Email,
-                             Phone = pp.Phone,
-                             Bithday = pp.Birthday
-                         }
-        );
-
-    foreach (var qfs in query_for_ser)
-    {
-        Console.WriteLine(@$"{qfs.FirstName} {qfs.LastName} {qfs.MiddleName} {qfs.Email} {qfs.Phone} {qfs.Bithday}");
-    }
-
-
-     JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            WriteIndented = true
-        };
-    string path4 = "C:\\Users\\marin\\OneDrive\\Desktop\\json.txt";
-
-    //foreach (var qfs in query_for_ser) {
-        string inJson = JsonSerializer.Serialize(query_for_ser, options);
-        
-        using (FileStream fileStream = new FileStream(path4, FileMode.OpenOrCreate))
-        {
-        byte[] buffer = Encoding.Default.GetBytes(inJson);
-        await fileStream.WriteAsync(buffer, 0, buffer.Length);
-        }
-    //}
-
-}
-
-
-
-void AddedData() {
-    using (var context = new DataContext())
-    {
-        var countries = new List<Country> {
-            new Country { Name = "Россия"},
-            new Country { Name = "Англия"},
-            new Country { Name = "Франция"}
-        };
-        foreach (var country in countries) {
-            context.Countries.Add(country);
-        }        
-        context.SaveChanges();
-
-        var cities = new List<City> {
-            new City { Name = "Москва", Country = context.Countries.First(c => c.Name == "Россия")},
-            new City { Name = "Самара", Country = context.Countries.First(c => c.Name == "Россия")},
-            new City { Name = "Лондон", Country = context.Countries.First(c => c.Name == "Англия")},
-            new City { Name = "Оксфорд", Country = context.Countries.First(c => c.Name == "Англия")},
-            new City { Name = "Париж", Country = context.Countries.First(c => c.Name == "Франция")},
-            new City { Name = "Тулуза", Country = context.Countries.First(c => c.Name == "Франция")},
-        };
-        foreach (var city in cities)
-        {
-            context.Cities.Add(city);
-        }
-        context.SaveChanges();
-
-        var privatePersons = new List<PrivatePerson> {
-            new PrivatePerson { FirstName = "Иванов",
-                                LastName = "Иван",
-                                MiddleName = "Иванович",
-                                Gender = Gender.Male,
-                                PlaceOfWork = "Завод1",
-                                Age = 61,
-                                Country = context.Countries.First(c => c.Name == "Россия"),
-                                City = context.Cities.First(c => c.Name == "Москва"),
-                                Address = "г. Москва, ул. Выдуманная, д. 1, кв. 1",
-                                Email = "ivanov@list.ru",
-                                Phone = "+79371111111",
-                                Birthday = new DateTime (1963,8,1)
-            },
-            new PrivatePerson { FirstName = "Петров",
-                                LastName = "Петр",
-                                MiddleName = "Петрович",
-                                Gender = Gender.Male,
-                                PlaceOfWork = "Завод2",
-                                Age = 39,
-                                Country = context.Countries.First(c => c.Name == "Россия"),
-                                City = context.Cities.First(c => c.Name == "Москва"),
-                                Address = "г. Москва, ул. Придуманная, д. 1, кв. 1",
-                                Email = "petrov@list.ru",
-                                Phone = "+79371111112",
-                                Birthday = new DateTime (1985,8,1)
-            },
-            new PrivatePerson { FirstName = "Кириллов",
-                                LastName = "Кирилл",
-                                MiddleName = "Кириллович",
-                                Gender = Gender.Male,
-                                PlaceOfWork = "Завод3",
-                                Age = 28,
-                                Country = context.Countries.First(c => c.Name == "Россия"),
-                                City = context.Cities.First(c => c.Name == "Самара"),
-                                Address = "г. Самара, ул. Вольская, д. 1, кв. 1",
-                                Phone = "+79371111113",
-                                Email = "kirillov@list.ru",
-                                Birthday = new DateTime (1995,9,2)
-            },
-            new PrivatePerson { FirstName = "Сидоров",
-                                LastName = "Сидр",
-                                MiddleName = "Сидорович",
-                                Gender = Gender.Male,
-                                PlaceOfWork = "Завод4",
-                                Age = 44,
-                                Country = context.Countries.First(c => c.Name == "Россия"),
-                                City = context.Cities.First(c => c.Name == "Самара"),
-                                Address = "г. Самара, ул. Тополей, д. 1, кв. 1",
-                                Email = "sidorov@list.ru",
-                                Phone = "+79371111114",
-                                Birthday = new DateTime (1980,8,1)
-            },
-            new PrivatePerson { FirstName = "Ivanov",
-                                LastName = "Ivan",
-                                MiddleName = "Ivanovich",
-                                Gender = Gender.Male,
-                                PlaceOfWork = "Zavod1",
-                                Age = 62,
-                                Country = context.Countries.First(c => c.Name == "Англия"),
-                                City = context.Cities.First(c => c.Name == "Лондон"),
-                                Address = "г. Лондон, ул. Выдуманная, д. 1, кв. 1",
-                                Email = "ivanov_english_man@list.ru",
-                                Phone = "+79371111115",
-                                Birthday = new DateTime (1962,8,1)
-            },
-            new PrivatePerson { FirstName = "Petrova",
-                                LastName = "Helga",
-                                MiddleName = "Petrovna",
-                                Gender = Gender.Female,
-                                PlaceOfWork = "Zavod43",
-                                Age = 48,
-                                Country = context.Countries.First(c => c.Name == "Англия"),
-                                City = context.Cities.First(c => c.Name == "Оксфорд"),
-                                Address = "г. Оксфорд, ул. Придуманная, д. 1, кв. 1",
-                                Email = "petrova_helga@list.ru",
-                                Phone = "+79371111116",
-                                Birthday = new DateTime (1976,8,1)
-            },
-            new PrivatePerson { FirstName = "Kruasanova",
-                                LastName = "Zaza",
-                                MiddleName = "Olegovna",
-                                Gender = Gender.Female,
-                                PlaceOfWork = "Zavod34",
-                                Age = 36,
-                                Country = context.Countries.First(c => c.Name == "Франция"),
-                                City = context.Cities.First(c => c.Name == "Париж"),
-                                Address = "г. Париж, ул. Придуманная, д. 1, кв. 1",
-                                Email = "kruasanova@list.ru",
-                                Phone = "+79371111117",
-                                Birthday = new DateTime (1988,8,1)
-            },
-            new PrivatePerson { FirstName = "Kruasanova",
-                                LastName = "Maria",
-                                MiddleName = "Olegovna",
-                                Gender = Gender.Female,
-                                PlaceOfWork = "Zavod6589",
-                                Age = 36,
-                                Country = context.Countries.First(c => c.Name == "Франция"),
-                                City = context.Cities.First(c => c.Name == "Тулуза"),
-                                Address = "г. Тулуза, ул. Выдуманная, д. 1, кв. 1",
-                                Email = "kruasanova_m@list.ru",
-                                Phone = "+79371111118",
-                                Birthday = new DateTime (1988,8,1)
-            }
-        };
-        foreach (var pPerson in privatePersons)
-        {
-            context.PrivatePersons.Add(pPerson);
-        }
-        context.SaveChanges();
-
-        var legalPersons = new List<LegalPerson>()
-        { 
-            new LegalPerson { CompanyName = "CompanyName1",
-                              TIN = "1111111111",
-                              PSRN = "222222222222222",
-                              Country = context.Countries.First(c => c.Name == "Россия"),
-                              City = context.Cities.First(c => c.Name == "Москва"),
-                              Address = "Адрес1",
-                              Email = "сompanyName1@gmail.com",
-                              Phone = "+79471111111"
-            },
-            new LegalPerson { CompanyName = "CompanyName2",
-                              TIN = "2222222222",
-                              PSRN = "333333333333333",
-                              Country = context.Countries.First(c => c.Name == "Россия"),
-                              City = context.Cities.First(c => c.Name == "Самара"),
-                              Address = "Адрес6",
-                              Email = "сompanyName2@gmail.com",
-                              Phone = "+79471111125"
-            },
-            new LegalPerson { CompanyName = "CompanyName3",
-                              TIN = "3333333333",
-                              PSRN = "444444444444444",
-                              Country = context.Countries.First(c => c.Name == "Англия"),
-                              City = context.Cities.First(c => c.Name == "Лондон"),
-                              Address = "Адрес98",
-                              Email = "сompanyName3@gmail.com",
-                              Phone = "+79471115125"
-            },
-            new LegalPerson { CompanyName = "CompanyName4",
-                              TIN = "4444444444",
-                              PSRN = "555555555555555",
-                              Country = context.Countries.First(c => c.Name == "Англия"),
-                              City = context.Cities.First(c => c.Name == "Оксфорд"),
-                              Address = "Адрес198",
-                              Email = "сompanyName4@gmail.com",
-                              Phone = "+79475915125"
-            },
-            new LegalPerson { CompanyName = "CompanyName5",
-                              TIN = "5555555555",
-                              PSRN = "666666666666666",
-                              Country = context.Countries.First(c => c.Name == "Франция"),
-                              City = context.Cities.First(c => c.Name == "Париж"),
-                              Address = "Адрес478",
-                              Email = "сompanyName5@gmail.com",
-                              Phone = "+79475425125"
-            },
-            new LegalPerson { CompanyName = "CompanyName6",
-                              TIN = "6666666666",
-                              PSRN = "777777777777777",
-                              Country = context.Countries.First(c => c.Name == "Франция"),
-                              City = context.Cities.First(c => c.Name == "Тулуза"),
-                              Address = "Адрес987",
-                              Email = "сompanyName6@gmail.com",
-                              Phone = "+79478525125"
-            },
-        };
-        foreach (var lPerson in legalPersons)
-        {
-            context.LegalPersons.Add(lPerson);
-        }
-        context.SaveChanges();
-
-        var contracts = new List<Contract>() {
-            new Contract {
-                    Counterparty = context.LegalPersons.First(c => c.Country.Name == "Россия" && c.City.Name == "Москва"),
-                    Designee = context.PrivatePersons.First(d => d.Country.Name == "Англия"),
-                    Amount = 4500000,
-                    Status = Status.InWork,
-                    DateOfSigning = new DateTime(2024,8,10)
-            },
-            new Contract {
-                    Counterparty = context.LegalPersons.First(c => c.Country.Name == "Россия" && c.City.Name == "Самара"),
-                    Designee = context.PrivatePersons.First(d => d.Age > 60),
-                    Amount = 39000,
-                    Status = Status.InWork,
-                    DateOfSigning = new DateTime(2024,6,12)
-            },
-        };
-        foreach (var contract in contracts)
-        {
-            context.Contracts.Add(contract);
-        }
-        context.SaveChanges();
-    }
-}
+} while (menu);
