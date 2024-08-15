@@ -58,6 +58,57 @@ using (var context = new DataContext())
         Console.WriteLine(sq.Status);
     }
 
+    //var qurey_for_serializer = context.Database.ExecuteSql(@$"
+    //                                                       select * from PrivatePersons pp
+    //                                                       join Contracts c
+    //                                                       on pp.PrivatePersonId = c.DesigneeId
+    //                                                       join LegalPersons lp
+    //                                                       on c.CounterpartyId = lp.LegalPersonId
+    //                                                       join Cities ci
+    //                                                       on lp.CityId = ci.CityId
+    //                                                       where ci.Name = 'Москва'
+    //                                                       and c.Status = {status}
+    //                                                       ");
+    //foreach (var qfs in qurey_for_serializer)
+    //{
+    //    Console.WriteLine(@$"{qfs.FirstName} {qfs.LastName} {qfs.MiddleName}");
+    //}
+
+
+    //var qurey_for_serializer = context.PrivatePersons
+    //                                  .Include(pp => pp.Contracts)
+    //                                  .ThenInclude(c => c.Counterparty)
+    //                                  .ThenInclude(cp => cp.City)  
+    //                                  .Where(pp => pp.Contracts.Where(c => c.Counterparty.City.Name == "Москва"))
+    //                                  .ToList();
+
+
+
+    var query_for_ser = (from pp in context.PrivatePersons
+                         join c in context.Contracts on pp.PrivatePersonId equals c.DesigneeId
+                         join lp in context.LegalPersons on c.CounterpartyId equals lp.LegalPersonId
+                         join cit in context.Cities on lp.CityId equals cit.CityId
+                         where cit.Name == "Москва" && c.Status == status
+                         select new 
+                         { 
+                            FirstName = pp.FirstName,
+                            LastName = pp.LastName,
+                            MiddleName = pp.MiddleName,
+                            Email = pp.Email,
+                            Phone = pp.Phone,
+                            Bithday = pp.Birthday
+                         }
+        );
+
+    foreach (var qfs in query_for_ser)
+    {
+        Console.WriteLine(@$"{qfs.FirstName} {qfs.LastName} {qfs.MiddleName} {qfs.Email} {qfs.Phone} {qfs.Bithday}");
+    }
+
+    //json
+
+
+
 }
 
 

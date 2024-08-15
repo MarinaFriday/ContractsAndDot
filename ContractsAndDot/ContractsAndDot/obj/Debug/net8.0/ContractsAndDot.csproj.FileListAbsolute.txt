@@ -185,7 +185,6 @@ C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAn
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\System.Windows.Extensions.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
@@ -259,9 +258,9 @@ C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAn
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.AssemblyInfo.cs
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.csproj.CoreCompileInputs.cache
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.sourcelink.json
-C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.csproj.CopyComplete
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\refint\ContractsAndDot.dll
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.pdb
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ContractsAndDot.genruntimeconfig.cache
 C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\ref\ContractsAndDot.dll
+C:\Users\marin\OneDrive\Desktop\Акелон\gitinit\ContractsAndDot\ContractsAndDot\obj\Debug\net8.0\Contract.0B33BF1E.Up2Date
